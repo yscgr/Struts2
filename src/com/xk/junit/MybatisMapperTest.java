@@ -16,7 +16,8 @@ public class MybatisMapperTest {
 	public void testGetUser() throws IOException {
 		SqlSession sqlSession = MybatisUtil.getSqlSession(true);
 		UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
-		User user = userMapper.selectByPrimaryKey(6);
+		User user = userMapper.selectByPrimaryKey(8);
+		
 		System.out.println(user.getUsername()+" "+user.getEmail());
 	}
 	@Test
@@ -25,8 +26,11 @@ public class MybatisMapperTest {
 		UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
 		UserExample example = new UserExample();
 		List<User> users = userMapper.selectByExample(example);
-		System.out.println(users);
-	}
+		for(int i = 0 ; i < users.size(); i++) {
+			User user = users.get(i);
+			System.out.println(user.getUsername()+" "+user.getEmail());
+		}
+	} 
 	@Test
 	public void testDeleteUser() throws IOException {
 		SqlSession sqlSession = MybatisUtil.getSqlSession(true);
